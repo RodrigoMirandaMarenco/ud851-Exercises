@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onClickOpenAddressButton(View v) {
         // COMPLETE (5) Store an address in a String
-        String address = "2802 NEWELL ST LOS ANGELES, CA 90039";
+        String address = "TEST ADDRESS";
 
         // COMPLETE (6) Use Uri.Builder with the appropriate scheme and query to form the Uri for the address
         Uri.Builder builder = new Uri.Builder();
