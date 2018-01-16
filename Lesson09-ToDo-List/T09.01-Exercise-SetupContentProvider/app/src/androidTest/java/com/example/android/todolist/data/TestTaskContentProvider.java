@@ -24,10 +24,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.android.todolist.data.TaskContentProvider;
-import com.example.android.todolist.data.TaskContract;
-import com.example.android.todolist.data.TaskDbHelper;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,6 +74,7 @@ public class TestTaskContentProvider {
          * We will use the ComponentName for our ContentProvider class to ask the system
          * information about the ContentProvider, specifically, the authority under which it is
          * registered.
+         *
          */
         String packageName = mContext.getPackageName();
         String taskProviderClassName = TaskContentProvider.class.getName();
