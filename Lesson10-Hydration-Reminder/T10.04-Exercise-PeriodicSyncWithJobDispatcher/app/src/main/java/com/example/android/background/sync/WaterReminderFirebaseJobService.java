@@ -15,25 +15,63 @@
  */
 package com.example.android.background.sync;
 
-public class WaterReminderFirebaseJobService {
-    // TODO (3) WaterReminderFirebaseJobService should extend from JobService
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 
-    // TODO (4) Override onStartJob
-        // TODO (5) By default, jobs are executed on the main thread, so make an anonymous class extending
+import com.firebase.jobdispatcher.JobParameters;
+import com.firebase.jobdispatcher.JobService;
+
+public class WaterReminderFirebaseJobService extends JobService{
+
+    private BackGroundTask mBackGroundTask = new BackGroundTask();
+
+    @Override
+    public boolean onStartJob(JobParameters jobParameters) {
+        mBackGroundTask.execute(jobParameters);
+        return true;
+    }
+
+    @Override
+    public boolean onStopJob(JobParameters jobParameters) {
+        if (mBackGroundTask != null) {
+            mBackGroundTask.cancel(true);
+        }
+        return true;
+    }
+    // COMPLETE (3) WaterReminderFirebaseJobService should extend from JobService
+
+    // COMPLETE (4) Override onStartJob
+        // COMPLETE (5) By default, jobs are executed on the main thread, so make an anonymous class extending
         //  AsyncTask called mBackgroundTask.
-            // TODO (6) Override doInBackground
-                // TODO (7) Use ReminderTasks to execute the new charging reminder task you made, use
+    @SuppressLint("StaticFieldLeak")
+    class BackGroundTask extends AsyncTask<JobParameters, Void, JobParameters> {
+
+        @Override
+        protected JobParameters doInBackground(JobParameters... voids) {
+            ReminderTasks.executeTask(WaterReminderFirebaseJobService.this, ReminderTasks.ACTION_CHARGING_REMINDER);
+            return voids[0];
+        }
+
+        @Override
+        protected void onPostExecute(JobParameters jobParameters) {
+            super.onPostExecute(jobParameters);
+            jobFinished(jobParameters, false);
+        }
+
+    }
+            // COMPLETE (6) Override doInBackground
+                // COMPLETE (7) Use ReminderTasks to execute the new charging reminder task you made, use
                 // this service as the context (WaterReminderFirebaseJobService.this) and return null
                 // when finished.
-            // TODO (8) Override onPostExecute and called jobFinished. Pass the job parameters
+            // COMPLETE (8) Override onPostExecute and called jobFinished. Pass the job parameters
             // and false to jobFinished. This will inform the JobManager that your job is done
             // and that you do not want to reschedule the job.
 
-        // TODO (9) Execute the AsyncTask
-        // TODO (10) Return true
+        // COMPLETE (9) Execute the AsyncTask
+        // COMPLETE (10) Return true
 
-    // TODO (11) Override onStopJob
-        // TODO (12) If mBackgroundTask is valid, cancel it
-        // TODO (13) Return true to signify the job should be retried
+    // COMPLETE (11) Override onStopJob
+        // COMPLETE (12) If mBackgroundTask is valid, cancel it
+        // COMPLETE (13) Return true to signify the job should be retried
 
 }

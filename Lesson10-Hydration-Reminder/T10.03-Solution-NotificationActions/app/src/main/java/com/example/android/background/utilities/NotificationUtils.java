@@ -118,7 +118,7 @@ public class NotificationUtils {
     //  COMPLETED (11) Add a static method called drinkWaterAction
     private static Action drinkWaterAction(Context context) {
         // COMPLETED (12) Create an Intent to launch WaterReminderIntentService
-        Intent incrementWaterCountIntent = new Intent(context, WaterReminderIntentService.class);
+        Intent incrementWaterCountIntent =              new Intent(context, WaterReminderIntentService.class);
         // COMPLETED (13) Set the action of the intent to designate you want to increment the water count
         incrementWaterCountIntent.setAction(ReminderTasks.ACTION_INCREMENT_WATER_COUNT);
         // COMPLETED (14) Create a PendingIntent from the intent to launch WaterReminderIntentService
